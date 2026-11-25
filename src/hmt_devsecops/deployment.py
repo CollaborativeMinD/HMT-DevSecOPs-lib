@@ -47,7 +47,8 @@ def compose_document(bound: BoundPolicy, context: Path) -> dict:
             "devsecops": {
                 **sandbox, "image": f"hmt-devsecops-tools:{__version__}", "user": "10001:10001", "cpus": deploy.resources.service_cpus,
                 "build": {"context": str(context.resolve()).replace("$", "$$"),
-                          "args": {"PYTHON_IMAGE": deploy.python_image, "UV_IMAGE": deploy.uv_image}},
+                          "args": {"PYTHON_IMAGE": deploy.python_image, "UV_IMAGE": deploy.uv_image,
+                                   "PYTHON_APK": deploy.python_apk or ""}},
                 "ports": [f"127.0.0.1:{deploy.http_port}:{API_PORT}"], "volumes": mounts,
                 "command": [".venv/bin/python", "-m", "hmt_devsecops.deployment", "serve",
                             "--policy", policy_target, "--expect-sha256", bound.sha256],

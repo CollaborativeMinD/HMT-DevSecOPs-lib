@@ -63,6 +63,7 @@ class ResourceBudget(Declaration):
 
 class Deployment(Declaration):
     resources: ResourceBudget = Field(default_factory=ResourceBudget.shipped)
+    python_apk: Annotated[str, Field(pattern=r"^3\.13\.\d+_git\d+-r\d+$")] | None = None
     python_image: Image
     uv_image: Image
     prometheus_image: Image
