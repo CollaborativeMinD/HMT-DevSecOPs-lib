@@ -34,4 +34,6 @@ The workstation qualified source commit `ec4b0dc`. Forgejo run 1 passed 74 tests
 
 The rendered Compose artifact passed `docker compose config`. Both OCI architectures then ran the API and a live authenticated Prometheus scrape with disposable read-only Docker volumes. [OCI verification](evidence/policy-toml/oci-verification.json)
 
+GitHub blocked the hosted job before startup because of an account billing lock. The attempted run was removed after its diagnostic was recorded. The Forgejo run is the CI qualification for this release. [GitHub startup receipt](evidence/policy-toml/github-startup.json)
+
 The requirements graph, screenshots, and gate reports describe the original 1.0.0 release. [Historical evidence](release/verification.md)
