@@ -24,7 +24,9 @@ def provision():
         path = bound.resolve_ref(ref)
         path.write_text(secrets.token_hex(32))
         path.chmod(0o440)
-    os.link(bound.resolve_ref(bound.policy.http.metrics_token_file), state / "hmt_metrics_token")
+    metrics = state / "monitor"
+    metrics.mkdir()
+    os.link(bound.resolve_ref(bound.policy.http.metrics_token_file), metrics / "hmt_metrics_token")
     print(json.dumps(compose_document(bound, Path("/app"))))
 
 
@@ -67,7 +69,8 @@ def verify_monitor(run, root, cfg, platform, app, companion, folder, project):
         monitor = spec["services"]["prometheus"]
         monitor.update(image=companion, platform=platform)
         monitor["volumes"][0]["source"] = str(root / "monitoring/prometheus.yml")
-        monitor["volumes"][1] = "credentials:/run/secrets:ro"
+        monitor["volumes"][1] = {"type": "volume", "source": "credentials", "target": "/run/secrets",
+                                 "read_only": True, "volume": {"subpath": "monitor"}}
         file.write_text(json.dumps(spec), encoding="utf8")
         run(*compose, "up", "-d", timeout=cfg.witness_seconds)
         raw = run(*compose, "exec", "-T", "devsecops", "python3.13", "-m", "release.monitor_probe",
