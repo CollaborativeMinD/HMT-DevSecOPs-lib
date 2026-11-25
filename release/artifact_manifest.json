@@ -1,0 +1,432 @@
+[
+  {
+    "path": ".python-version",
+    "sha256": "e72b03ed5b70312f2782f2b05055c55b24670e126d50e24c4f2c559bf288f810",
+    "origin": "inherited"
+  },
+  {
+    "path": "AGENTS.md",
+    "sha256": "bb7c6082878ea5976da9c87e5d8937cd18f950f2b44d37a75147dd453045afac",
+    "origin": "modified"
+  },
+  {
+    "path": "Dockerfile",
+    "sha256": "5fb954dca3822a16b3e351b11fcc6306c0a0db905e5debbf849614dc00c32513",
+    "origin": "inherited"
+  },
+  {
+    "path": "HMT_DevSecOps_Closeout_v1.0.0.html",
+    "sha256": "a6d146a1b561b78af3d4f4858aae5652d4b680997f698823168cda87eb343c77",
+    "origin": "modified"
+  },
+  {
+    "path": "HMT_DevSecOps_Requirements_v1.0.0.html",
+    "sha256": "38fdb25f8c27fd94cbec38f5c1d3f309dc7d3133b86c67a1c52a00113d5092a3",
+    "origin": "modified"
+  },
+  {
+    "path": "LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "origin": "inherited"
+  },
+  {
+    "path": "README.md",
+    "sha256": "f359d2a56201787597e92e96ba70ea230f3dd7a19f0239c720e4c45e3cfae75b",
+    "origin": "modified"
+  },
+  {
+    "path": "Runbook.md",
+    "sha256": "289e0f419bddad852a6c2a494ce79fa95632a835eaaecfba0a53fc48b899ecc0",
+    "origin": "modified"
+  },
+  {
+    "path": "architecture/graph.json",
+    "sha256": "28433340a5d22f11f588b2ee7dae8c11464a201c0c6d5c3e5af40693a393122e",
+    "origin": "modified"
+  },
+  {
+    "path": "compose.yaml",
+    "sha256": "b6d5770b174edccc01264bd0092a6d5b0ec76cf7741aef9160e62f5b49279ea1",
+    "origin": "modified"
+  },
+  {
+    "path": "evidence/HMT_DevSecOps_Closeout_v1.0.0.png",
+    "sha256": "fa88f58af9462b2598bcd62bf3fb3613ddd3652c923903b6dc5a11bde70aec6c",
+    "origin": "modified"
+  },
+  {
+    "path": "evidence/HMT_DevSecOps_Requirements_v1.0.0.png",
+    "sha256": "b77f1ec51b0a4e64cbade24c706afd4e0e945ab6501189bbc07ecbaf3ac929c4",
+    "origin": "modified"
+  },
+  {
+    "path": "evidence/browser_reconciliation.json",
+    "sha256": "c67f425f43708671644e6e5a28e4e75e674efde8c5abf2acc135c6075749ccff",
+    "origin": "new"
+  },
+  {
+    "path": "evidence/environment.json",
+    "sha256": "ba2cea5146b745e65add54657ce7e3ecbc41ac56faaf99e2af882da8aedd43d9",
+    "origin": "inherited"
+  },
+  {
+    "path": "evidence/http_process_restarts.json",
+    "sha256": "976ee8e50bee0e31d889bfd8cbadedbc4ef5aafabecb2f487ee7596e61267139",
+    "origin": "inherited"
+  },
+  {
+    "path": "evidence/machine_handoff_validation.txt",
+    "sha256": "5863e040d14196e813beacbfead1e46006796c51f49ede415fcf2ff475121066",
+    "origin": "inherited"
+  },
+  {
+    "path": "evidence/patch_coverage.json",
+    "sha256": "9e064b29c155fdd9b1ab21b136197dc2454f82534c6e26fa023decdca3a5c985",
+    "origin": "new"
+  },
+  {
+    "path": "evidence/patch_regression.txt",
+    "sha256": "b89bfaaa5a98478d771709c71caeed0b6a396a81ccb3e046a87dadc1ac4b559c",
+    "origin": "new"
+  },
+  {
+    "path": "evidence/pytest.txt",
+    "sha256": "e136fc5fae2198d9b516bcbadbc436194cba5b3e2ea7e8f52dd8fe616001794c",
+    "origin": "inherited"
+  },
+  {
+    "path": "evidence/skill_installer.txt",
+    "sha256": "71772dd33ab4eadbdb9affe963ec32e796794a7ddceb79a2a94e06b6e67da019",
+    "origin": "inherited"
+  },
+  {
+    "path": "evidence/uv_lock.txt",
+    "sha256": "da780db8504f7be7f881bb1280609f6511cf5251bdb4b467ab32080cb728677e",
+    "origin": "inherited"
+  },
+  {
+    "path": "examples/config.json",
+    "sha256": "9acbb4471872f3b9dfb18b5bac4a260dce989c2a51a465b378f8bf158bcf1b17",
+    "origin": "inherited"
+  },
+  {
+    "path": "images.env.example",
+    "sha256": "8ace84609f651c3ae6d01a1404a1c03436a92bbdf8d669490213f41b754a5ae3",
+    "origin": "inherited"
+  },
+  {
+    "path": "integrations/claude-code.mcp.json",
+    "sha256": "54b1cafbc08d483837144d2100e183daddb12c28ea05c2e416a3268ae6df4ea7",
+    "origin": "inherited"
+  },
+  {
+    "path": "integrations/codex.config.toml",
+    "sha256": "e2d8ed8f489856c6dcf288da1ca7c4c1c5996a58b02cf14715c6ea9f87e1b712",
+    "origin": "inherited"
+  },
+  {
+    "path": "integrations/copilot.mcp.json",
+    "sha256": "3c537437c98ffe7ff76d3dd52bbfc9257169ea434cf44e3126ad7cdcef36a1fb",
+    "origin": "inherited"
+  },
+  {
+    "path": "integrations/cursor.mcp.json",
+    "sha256": "54b1cafbc08d483837144d2100e183daddb12c28ea05c2e416a3268ae6df4ea7",
+    "origin": "inherited"
+  },
+  {
+    "path": "monitoring/README.md",
+    "sha256": "4d8e6e3d4faa2f4363c4cdb0542ae17c436c4c5f0d0a459e126dced09d89bb96",
+    "origin": "new"
+  },
+  {
+    "path": "monitoring/alertmanager.yml",
+    "sha256": "6ccc57c30111da6218f23c5558ded26841a5dfb7b73357f5a21509eeaa964ca3",
+    "origin": "inherited"
+  },
+  {
+    "path": "monitoring/alerts.yml",
+    "sha256": "df7f81d3079dc2d30501a38ff8a3b31bb4fdf5d834b3c4f3704d1a543ecfa3e1",
+    "origin": "inherited"
+  },
+  {
+    "path": "monitoring/grafana-dashboard.json",
+    "sha256": "7554fd21729bec232ea2e09f52f433f37f2e00e54bbe96721d6ef074a6e447b7",
+    "origin": "inherited"
+  },
+  {
+    "path": "monitoring/prometheus.local.yml",
+    "sha256": "8dbe68616d32e33f70b681c94a0091d893e5c40e3a521731ccbc811cbf6ed592",
+    "origin": "new"
+  },
+  {
+    "path": "monitoring/prometheus.yml",
+    "sha256": "04f3a526d79781c9c7e96dbe842d8fb0bcb74a3e263de7a1c76ae3abb41efd89",
+    "origin": "modified"
+  },
+  {
+    "path": "ops/ansible/ansible.cfg",
+    "sha256": "b25cfb68711d0a315d8ef11676da72b7caa843c4795ec68c5639fe1d83ff67d5",
+    "origin": "inherited"
+  },
+  {
+    "path": "ops/ansible/inventory.example.ini",
+    "sha256": "4160742652c8e164b6aa551a9f51fa3a47b09161c8af70a5282e877274bd4c41",
+    "origin": "inherited"
+  },
+  {
+    "path": "ops/ansible/site.yaml",
+    "sha256": "3c28247fd63eaa587fde3cf1d8c476816fd556906a75f29f13b9ee4c8463e999",
+    "origin": "inherited"
+  },
+  {
+    "path": "ops/kubernetes/remediator.yaml",
+    "sha256": "1b60d59d4fd4ae85f9d310bb8ae9e1b81e5c604946598813d0810ca327547016",
+    "origin": "inherited"
+  },
+  {
+    "path": "ops/terraform/main.tf",
+    "sha256": "75c4d06475afea625c75010840dea7cad3f9259724f9380a34d1e3a57a5c51d7",
+    "origin": "inherited"
+  },
+  {
+    "path": "pyproject.toml",
+    "sha256": "a848ed214bdde4d470480542c2ab49ca11c8f1b60aa90f779c7ed5c6bffb6ba3",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/DevOps_iac_runbook.md",
+    "sha256": "1642af67738073058a8c7f209878316a51696885098d4ad93339a5eb59301b1a",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/Dockerfile",
+    "sha256": "d302cc09624e9a65e59eda3e6a76c3116ea75b02e17e6852230ee5f4bb7a2e46",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/ansible_inventory.ini",
+    "sha256": "9760f7a6f5813285606b516420ce82587a4b9a39e9c1360f0e86ece97930c54f",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/ansible_mult_arch_template.yml",
+    "sha256": "664aaa9f9c5420a403e4c43ab5b068297af0c81ce3672b3501f7dbfddb6a220e",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/ansible_template.cfg",
+    "sha256": "25dc7fb212373e01364eb42eff2cbee9aa530db1f6895d31232ec77682e05bb2",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/main.py",
+    "sha256": "38c4379354a82db031c20c782c47fcae76865110292fa25754866ecba9062f18",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/main.tf",
+    "sha256": "36e12d5ab9947421bb19efbace62221f27bb13e376d8bb919cec103cccc2f34b",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/defaults/main.yaml",
+    "sha256": "4c16195d50d987e6f62f6ec6519ec884e35728f103ef2e19f53825fc33315d04",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/files/auto_healing_dashboard.json",
+    "sha256": "cb7c102a7ddb37f16ceaa4337e385c7e013009fe5de2d5d6b7ed3e768b14ba60",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/tasks/main.yaml",
+    "sha256": "77bae64b1caa665e412ed7ab874526c3564074630df843d6f3e14e07f79b2962",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/templates/alertmanager_routing.yaml",
+    "sha256": "0a83d49cc9356f58fb7fec3c57f0856e9c58fb5dcb856db005fb635c1b48c997",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/templates/apps-deployment-template.yaml",
+    "sha256": "55d8084fb2ac938dcfa9c69653444af19339804ec1b10e459624637967aaf3d2",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/templates/prometheus-rules.yaml.j2",
+    "sha256": "619a1ef184b8b6eb09caab1191eedb4479696cd8fcee61e191c021f29c928de3",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/templates/telemetry-storage.yaml",
+    "sha256": "17e5529b5b32a7967104a649476b32e0c55dcfdd3e654703f23869b75d38e348",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/k8s_telemetry_stack/templates/worker-deployment.yaml",
+    "sha256": "13a39135ec9ac25821d98563d6a4ae67cdad5d8c6150e7a42455b01b47417fbf",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/roles/storage_provisioner/tasks/main.yaml",
+    "sha256": "15932e848817681ff2c86cb86c3d3579c88cf52a10fcbb2e0a6ab307fa72b1d4",
+    "origin": "inherited"
+  },
+  {
+    "path": "references/drafts/site.yaml",
+    "sha256": "8e1cdf9834f99ed6f483e5da287866af625e7aaf9c46cc65d9a0ee9938b7c9f3",
+    "origin": "inherited"
+  },
+  {
+    "path": "release/gates.json",
+    "sha256": "57f7f69776de4242d2aea0d07567e96623f22a6993fd6abc7ae1027709a9330f",
+    "origin": "modified"
+  },
+  {
+    "path": "release/machine_handoff.json",
+    "sha256": "0fce978ed907be36d0898cffecf4fa7bcb3bafb13935dfc43258589943c69f1d",
+    "origin": "inherited"
+  },
+  {
+    "path": "release/rrca.md",
+    "sha256": "ca983be65e0dfbeb5fec6408637072ed0e61a9749f6fb479da721b0a154ae05e",
+    "origin": "modified"
+  },
+  {
+    "path": "release/verification.md",
+    "sha256": "0be76b128cdb222bc857ef6535f550a1cb4d487d440aa572a5c2aa4f99048871",
+    "origin": "modified"
+  },
+  {
+    "path": "skills/ansible-dry-run/SKILL.md",
+    "sha256": "85d03f2dc8b17176d821d059f513e006b185bed1e4e65e8174650eff83f354b0",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/create-change-proposal/SKILL.md",
+    "sha256": "b9f969784e3ca5bc0ef0b697fe55839f34803e32e067a43f01d1601a8289efdb",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/evidence-hash/SKILL.md",
+    "sha256": "d55fe07cd0dc73afb2b839a8219af99e99475476e3dd79fac761179ab44ed718",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/inventory-pmcs/SKILL.md",
+    "sha256": "9d3b9519748496b9efef277f877079841f66ea88c3cbfb54df3e9f825443b813",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/k3s-inspect/SKILL.md",
+    "sha256": "68e0b538afbefcc79fc4ffbe3aaa47855f8f5b84e3d9031654fb62f92b0bf07c",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/pace-recovery-review/SKILL.md",
+    "sha256": "3a43e7cb55aa95246d92db413577a9517a84c87304776caf98c91297b08cda90",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/release-evidence-report/SKILL.md",
+    "sha256": "3f5d2ae64004d0577fb209372778978e3a14614b600fbb7d20097fffbb6ad182",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/review-change-proposal/SKILL.md",
+    "sha256": "a530b7eb73f2e3d3e360ff0cbddb52383f3d36bd858c32fb29c0bead3aefebda",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/tailscale-health/SKILL.md",
+    "sha256": "63a6a304a92a2c91249c1a59a39428dd8e5ef4814315b1f4e81fa70886bd3b53",
+    "origin": "inherited"
+  },
+  {
+    "path": "skills/terraform-plan-review/SKILL.md",
+    "sha256": "29aa93b1dc7656993606252294a1334d5b6a69b7a685a6855f6484ce1a1952a7",
+    "origin": "inherited"
+  },
+  {
+    "path": "src/hmt_devsecops/__init__.py",
+    "sha256": "27e8febb48ada44153ea2add9969a2c50a9831a74d9755fdd53c549a888b1cc2",
+    "origin": "inherited"
+  },
+  {
+    "path": "src/hmt_devsecops/cli.py",
+    "sha256": "f30ac6f9e703656b7aeac968dd8ff479e6410340759b57d17d1c3d9de3d57d02",
+    "origin": "inherited"
+  },
+  {
+    "path": "src/hmt_devsecops/contracts.py",
+    "sha256": "28afca9cc9146b184d18e19ad5e852ebeae3f22eee13ab449dceae14662675e0",
+    "origin": "inherited"
+  },
+  {
+    "path": "src/hmt_devsecops/http.py",
+    "sha256": "90245e524172012681c9b1d6ab91db38eda7e19bacb1fc613aa93b9cc57aae2d",
+    "origin": "modified"
+  },
+  {
+    "path": "src/hmt_devsecops/operations.py",
+    "sha256": "31db2a4f1334b2134c18a4ebb21ff31c93a23da784b6cf2584cdca68e9a45b58",
+    "origin": "inherited"
+  },
+  {
+    "path": "src/hmt_devsecops/policy.py",
+    "sha256": "067262c689e2577fc7afcb704aaf959214a24f1326c1c1531541eaf0009ee953",
+    "origin": "inherited"
+  },
+  {
+    "path": "src/hmt_devsecops/stdio.py",
+    "sha256": "98e44cfb6c484c43cff9ff32ed8e199a01646afe8bd4e6b3048b7136568314e6",
+    "origin": "inherited"
+  },
+  {
+    "path": "tests/conftest.py",
+    "sha256": "a7fa1ef625c567d37bbdff9c0715f8dcb2ebc9616389ec5be5facd093718e453",
+    "origin": "inherited"
+  },
+  {
+    "path": "tests/test_artifacts.py",
+    "sha256": "c86f293f2a16956f7bd0077c10dd95d81362e68a479c34a2d79846f783368252",
+    "origin": "inherited"
+  },
+  {
+    "path": "tests/test_entrypoints.py",
+    "sha256": "26fce7b55c98c31ffbe99899ea78eaaf0967d9e7b6ad3b5541d81caebeab60e8",
+    "origin": "inherited"
+  },
+  {
+    "path": "tests/test_ops.py",
+    "sha256": "5e4ced74c53905e40ac83cda613dcb5b559cc39d523c7e6e7d3259603dd5b22f",
+    "origin": "inherited"
+  },
+  {
+    "path": "tests/test_reconciliation.py",
+    "sha256": "9afcd539ea375ec249ae5e91e19f88c1811a3320ff41c08a8492727cbd6f4c0a",
+    "origin": "new"
+  },
+  {
+    "path": "tests/test_transport.py",
+    "sha256": "69c1d57869ecf56c88c00673543864790da3ea104ef61d36413aa4ffc7730778",
+    "origin": "inherited"
+  },
+  {
+    "path": "tools/generate_reports.py",
+    "sha256": "24077371014538cfd499f6f724dcca9d3cfb97361ba85af5313f0143f0c7106e",
+    "origin": "new"
+  },
+  {
+    "path": "tools/install_skills.py",
+    "sha256": "11285a0a83317b62ed0dc250c9c24e79b8a9ea83014de5a22e14ac394babbad7",
+    "origin": "inherited"
+  },
+  {
+    "path": "tools/verify_reports_browser.py",
+    "sha256": "00d06eb03dda0f1d28b4addb5c28ec2552efc317319da6c283f9a102f40373a5",
+    "origin": "new"
+  }
+]

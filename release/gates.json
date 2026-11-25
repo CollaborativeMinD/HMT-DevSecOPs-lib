@@ -1,0 +1,152 @@
+[
+  {
+    "gate_id": "G-DRAFT-001",
+    "disposition": "PASS",
+    "reason": "17 draft file members extracted intact",
+    "evidence_ref": "references/drafts"
+  },
+  {
+    "gate_id": "G-CONTRACT-002",
+    "disposition": "PASS",
+    "reason": "Ten tool contracts and non-authoritative proposals",
+    "evidence_ref": "src/hmt_devsecops"
+  },
+  {
+    "gate_id": "G-TEST-003",
+    "disposition": "PASS",
+    "reason": "Current three-seam patched source: 52 pytest tests passed; 96.12% combined and 93.18% branch coverage. Prior 47-test receipt preserved.",
+    "evidence_ref": "evidence/patch_regression.txt"
+  },
+  {
+    "gate_id": "G-CLIENT-004",
+    "disposition": "PASS",
+    "reason": "JSON/TOML templates parsed; signed-in host operation not asserted",
+    "evidence_ref": "integrations"
+  },
+  {
+    "gate_id": "G-MCP-005",
+    "disposition": "PASS",
+    "reason": "Actual line-delimited MCP subprocess and HTTP ASGI TestClient",
+    "evidence_ref": "tests/test_transport.py"
+  },
+  {
+    "gate_id": "G-SEC-006",
+    "disposition": "PASS",
+    "reason": "Read grants, approval denial, path fences tested",
+    "evidence_ref": "tests/test_ops.py"
+  },
+  {
+    "gate_id": "G-METRICS-007",
+    "disposition": "PASS",
+    "reason": "Authenticated metrics generated with actual tool invocation",
+    "evidence_ref": "tests/test_transport.py"
+  },
+  {
+    "gate_id": "G-SKILL-008",
+    "disposition": "PASS",
+    "reason": "Ten SKILL.md files and dry-run installer tested",
+    "evidence_ref": "evidence/skill_installer.txt"
+  },
+  {
+    "gate_id": "G-PY-009",
+    "disposition": "PASS",
+    "reason": "Python 3.13.5 runtime used for tests; supported 3.12+ declaration",
+    "evidence_ref": "evidence/environment.json"
+  },
+  {
+    "gate_id": "G-LOCK-010",
+    "disposition": "HOLD",
+    "reason": "Resolver lock cannot be generated offline; dependencies unavailable in uv cache",
+    "evidence_ref": "evidence/uv_lock.txt"
+  },
+  {
+    "gate_id": "G-OCI-011",
+    "disposition": "HOLD",
+    "reason": "Docker and OCI daemon absent; image digest not verified",
+    "evidence_ref": "Dockerfile"
+  },
+  {
+    "gate_id": "G-ANSIBLE-012",
+    "disposition": "HOLD",
+    "reason": "Ansible CLI absent; only static contract checked",
+    "evidence_ref": "ops/ansible"
+  },
+  {
+    "gate_id": "G-TERRAFORM-013",
+    "disposition": "HOLD",
+    "reason": "Terraform CLI absent; only static HCL inspected",
+    "evidence_ref": "ops/terraform"
+  },
+  {
+    "gate_id": "G-K3S-014",
+    "disposition": "HOLD",
+    "reason": "No live k3s credentials and kubectl binary",
+    "evidence_ref": "ops/kubernetes"
+  },
+  {
+    "gate_id": "G-TAILSCALE-015",
+    "disposition": "HOLD",
+    "reason": "Tailscale CLI and live tailnet not present",
+    "evidence_ref": "Runbook.md"
+  },
+  {
+    "gate_id": "G-PROM-016",
+    "disposition": "HOLD",
+    "reason": "Prometheus and Alertmanager daemons unavailable; rules syntax not runtime evaluated",
+    "evidence_ref": "monitoring"
+  },
+  {
+    "gate_id": "G-GRAFANA-017",
+    "disposition": "HOLD",
+    "reason": "Grafana image not runnable in this container; configuration query/schema check only",
+    "evidence_ref": "monitoring/grafana-dashboard.json"
+  },
+  {
+    "gate_id": "G-HMTMA-018",
+    "disposition": "HOLD",
+    "reason": "Native HMT-Mission-Assurance evaluator not run in this environment",
+    "evidence_ref": "release/verification.md"
+  },
+  {
+    "gate_id": "G-42-019",
+    "disposition": "HOLD",
+    "reason": "Native42 standalone tool distribution unavailable for execution",
+    "evidence_ref": "release/verification.md"
+  },
+  {
+    "gate_id": "G-REPORT-020",
+    "disposition": "PASS",
+    "reason": "Standalone graph and closeout HTML generated from common model; browser capture separate",
+    "evidence_ref": "architecture/graph.json"
+  },
+  {
+    "gate_id": "G-BROWSER-021",
+    "disposition": "PASS",
+    "reason": "Fresh Chromium rendering for differentiated Requirements and Close-out views: 14 nodes each, design impact and release gate filtering, no JavaScript errors",
+    "evidence_ref": "evidence/browser_reconciliation.json"
+  },
+  {
+    "gate_id": "G-HTTP-022",
+    "disposition": "PASS",
+    "reason": "Two real Uvicorn localhost startup/restart cycles with auth denial, read, metrics, and readiness",
+    "evidence_ref": "evidence/http_process_restarts.json"
+  },
+  {
+    "gate_id": "G-RRCA-HTML-023",
+    "disposition": "PASS",
+    "reason": "Requirements design lens and Close-out evidence lens have distinct sections, identical canonical graph payloads, and direct regression tests",
+    "evidence_ref": "tests/test_reconciliation.py"
+  },
+  {
+    "gate_id": "G-RRCA-METRICS-024",
+    "disposition": "PASS",
+    "reason": "API HMT_METRICS_TOKEN and Prometheus credential file are both wired in Compose with authenticated scrape and token separation tested; live Prometheus service remains deployment-scoped",
+    "evidence_ref": "tests/test_reconciliation.py"
+  },
+  {
+    "gate_id": "G-RRCA-CAPACITY-025",
+    "disposition": "PASS",
+    "reason": "Finite 1\u201364 process-local request slots; 429 rejection before execution; capacity retained until worker completes; 52 tests passed with 93.18% branch coverage",
+    "evidence_ref": "evidence/patch_regression.txt"
+  }
+]

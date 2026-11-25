@@ -1,0 +1,1 @@
+{"servers":{"hmt-devsecops":{"type":"stdio","command":"hmt-devsecops-mcp","args":["--policy","/absolute/private/hmt_policy.toml"]}}}

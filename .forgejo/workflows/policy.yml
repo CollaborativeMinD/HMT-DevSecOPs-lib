@@ -1,0 +1,26 @@
+name: HMT policy qualification
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: station-linux
+    timeout-minutes: 15
+    steps:
+      - uses: https://data.forgejo.org/actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Qualify admitted policy and bounded tools
+        run: sh tools/qualify.sh
+      - name: Preserve policy evidence in RustFS
+        uses: https://data.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e
+        with:
+          name: hmt-policy-evidence
+          path: ci-proof/
+          if-no-files-found: error

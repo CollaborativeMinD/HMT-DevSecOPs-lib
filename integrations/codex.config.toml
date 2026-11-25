@@ -1,0 +1,3 @@
+[mcp_servers.hmt-devsecops]
+command = "hmt-devsecops-mcp"
+args = ["--policy", "/absolute/private/hmt_policy.toml"]

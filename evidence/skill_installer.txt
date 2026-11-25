@@ -1,0 +1,13 @@
+$ /opt/pyvenv/bin/python tools/install_skills.py --dest /mnt/data/hmt-devsecops-skill-preview --dry-run
+exit=0
+ansible-dry-run
+create-change-proposal
+evidence-hash
+inventory-pmcs
+k3s-inspect
+pace-recovery-review
+release-evidence-report
+review-change-proposal
+tailscale-health
+terraform-plan-review
+

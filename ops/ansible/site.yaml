@@ -1,0 +1,13 @@
+---
+- name: Read-only edge PMCS
+  hosts: edge
+  gather_facts: true
+  become: false
+  tasks:
+    - name: Show kernel release
+      ansible.builtin.command: uname -r
+      changed_when: false
+    - name: Check active k3s service without mutation
+      ansible.builtin.command: systemctl is-active k3s
+      changed_when: false
+      failed_when: false

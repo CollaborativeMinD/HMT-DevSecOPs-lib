@@ -1,0 +1,94 @@
+---
+- name: Verify cluster connectivity and register architecture matrix
+  ansible.builtin.debug:
+    msg: "Deploying telemetry targeting K8s node architecture: {{ ansible_architecture }}"
+
+- name: Ensure Local StorageClass definition file exists for the cluster
+  ansible.builtin.copy:
+    dest: "{{ base_storage_dir }}/local-storageclass.yaml"
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+        name: telemetry-local-storage
+      provisioner: kubernetes.io/no-provisioner
+      volumeBindingMode: WaitForFirstConsumer
+
+- name: Apply Local StorageClass definition via kubectl
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ base_storage_dir }}/local-storageclass.yaml"
+  failed_when: false # Allows execution to continue if cluster interaction is decoupled
+
+- name: Template out Alertmanager custom routing configurations
+  ansible.builtin.copy:
+    dest: "{{ base_storage_dir }}/alertmanager-config.yaml"
+    owner: root
+    group: root
+    mode: '0600'
+    content: |
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by: ['alertname', 'cluster', 'service']
+        group_wait: 30s
+        group_interval: 5m
+        repeat_interval: 12h
+        receiver: 'webhook-remediator'
+      receivers:
+      - name: 'webhook-remediator'
+        webhook_configs:
+        - url: 'http://127.0.0' # Webhook endpoint for async pipeline workers
+
+- name: Template out Loki storage and engine engine paths
+  ansible.builtin.copy:
+    dest: "{{ base_storage_dir }}/loki-config.yaml"
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      auth_enabled: false
+      server:
+        http_listen_port: 3100
+      common:
+        instance_addr: 127.0.0.1
+        path_prefix: {{ base_storage_dir }}/loki
+        storage:
+          filesystem:
+            chunks_directory: {{ base_storage_dir }}/loki/chunks
+            rules_directory: {{ base_storage_dir }}/loki/rules
+        replication_factor: 1
+        ring:
+          kvstore:
+            store: inmemory
+
+- name: Template out multi-arch PrometheusRule definitions
+  ansible.builtin.template:
+    src: templates/prometheus-rules.yaml.j2
+    dest: "{{ base_storage_dir }}/prometheus-rules.yaml"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Apply PrometheusRule alert definitions via kubectl
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ base_storage_dir }}/prometheus-rules.yaml"
+  failed_when: false # Decouples play completion from active cluster status checks
+
+- name: Provision Auto-Healing Grafana ConfigMap Provider
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: auto-healing-dashboard
+        namespace: monitoring
+        labels:
+          grafana_dashboard: "1"
+      data:
+        auto_healing_dashboard.json: "{{ lookup('file', 'auto_healing_dashboard.json') }}"

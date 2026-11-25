@@ -1,0 +1,34 @@
+---
+- name: Determine base telemetry storage path based on hardware architecture
+  ansible.builtin.set_fact:
+    base_storage_dir: "{{ 'opt/k8s/edge-storage' if ansible_architecture in ['aarch64', 'arm64'] else '/var/lib/k8s/main-storage' }}"
+    is_flash_storage: "{{ true if ansible_architecture in ['aarch64', 'arm64'] else false }}"
+
+- name: Create persistent storage root directories with correct permissions
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - "{{ base_storage_dir }}/prometheus"
+    - "{{ base_storage_dir }}/loki"
+    - "{{ base_storage_dir }}/grafana"
+
+- name: Optimize edge storage disk write attributes for ARM64 nodes
+  when: is_flash_storage | bool
+  block:
+    - name: Ensure fstab includes noatime options to reduce flash wear
+      ansible.posix.mount:
+        path: /
+        src: UUID={{ ansible_cmdline.root | replace('PARTUUID=', '') }}
+        fstype: ext4
+        opts: defaults,noatime,commit=30
+        state: present
+      register: fstab_status
+      failed_when: false # Prevent failure if root partitioning uses alternative labels
+
+    - name: Inform agent log of flash optimization status
+      ansible.builtin.debug:
+        msg: "Storage path optimized for ARM64 edge nodes. Commits delayed to 30s. fstab update: {{ fstab_status.changed }}"

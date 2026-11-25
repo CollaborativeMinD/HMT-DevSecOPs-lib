@@ -1,0 +1,17 @@
+....................................................                     [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.5-final-0 ________________
+
+Name                              Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------
+src/hmt_devsecops/__init__.py         1      0      0      0   100%
+src/hmt_devsecops/cli.py             20      1      2      1    91%   22
+src/hmt_devsecops/contracts.py       13      0      0      0   100%
+src/hmt_devsecops/http.py            74      3     14      1    95%   62, 84-86
+src/hmt_devsecops/operations.py      60      1     22      1    98%   70
+src/hmt_devsecops/policy.py          52      2     30      2    95%   28, 56
+src/hmt_devsecops/stdio.py           53      1     20      1    97%   57
+-----------------------------------------------------------------------------
+TOTAL                               273      8     88      6    96%
+Coverage JSON written to file evidence/patch_coverage.json
+Required test coverage of 90.0% reached. Total coverage: 96.12%

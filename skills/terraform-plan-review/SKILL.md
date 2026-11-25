@@ -1,0 +1,6 @@
+---
+name: terraform-plan-review
+description: Bounded HMT DevSecOps workflow for terraform plan review.
+---
+# Terraform Plan Review
+Use `hmt-devsecops-mcp` tool `terraform_plan`. First inspect `Runbook.md` and current operator grants. Confirm host-managed identity, workspace, and target. Never execute `terraform apply`, `terraform destroy`, `ansible-playbook` without `--check`, `tailscale up`, `systemctl restart`, or Kubernetes patches as an implicit side effect. Keep requests bounded and redact credentials. Required input: installed MCP connection, host configuration; file workflows also require an in-workspace path. Expected output: PASS, DENIED, HOLD, or INSUFFICIENT_EVIDENCE with reason and bounded evidence. On HOLD do not invent a success receipt. Review `AGENTS.md` for the authoritative boundary and `Runbook.md` for operator replay.

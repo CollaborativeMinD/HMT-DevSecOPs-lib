@@ -1,0 +1,277 @@
+{
+  "schema_id": "urn:hmt:devsecops:architecture:1.0.0",
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "family": "CRUV-E",
+      "statement": "Ten fixed tool operations with strict typed requests and finite bounds",
+      "implementation": "src/hmt_devsecops/contracts.py",
+      "verification": "tests/test_transport.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-002",
+      "family": "AUTH",
+      "statement": "Deny missing grants before tool execution",
+      "implementation": "src/hmt_devsecops/policy.py",
+      "verification": "tests/test_ops.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-003",
+      "family": "AUTH",
+      "statement": "Consequential changes require explicit approval and produce proposals, never execution",
+      "implementation": "src/hmt_devsecops/operations.py",
+      "verification": "tests/test_ops.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-004",
+      "family": "FILES",
+      "statement": "Reject escaped workspace paths and existing immutable proposals",
+      "implementation": "src/hmt_devsecops/policy.py",
+      "verification": "tests/test_ops.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-005",
+      "family": "MCP",
+      "statement": "Stateless line-delimited JSON-RPC stdio, five CRUV-E plus five operational tools",
+      "implementation": "src/hmt_devsecops/stdio.py",
+      "verification": "tests/test_transport.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-006",
+      "family": "HTTP",
+      "statement": "Bound HTTP payloads, authenticate calls, deny capacity exhaustion before effects, and retain slots until workers finish",
+      "implementation": "src/hmt_devsecops/http.py",
+      "verification": "tests/test_transport.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-007",
+      "family": "OBS",
+      "statement": "Authenticated metrics scraping with one host-provisioned token bound to Compose and Prometheus credential file",
+      "implementation": "src/hmt_devsecops/http.py",
+      "verification": "tests/test_transport.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-008",
+      "family": "SKILLS",
+      "statement": "Ten validated workflow SKILL.md references and configurable installer",
+      "implementation": "tools/install_skills.py",
+      "verification": "tests/test_artifacts.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-009",
+      "family": "CLIENT",
+      "statement": "Claude Code Cursor Codex and Copilot configuration templates",
+      "implementation": "integrations/claude-code.mcp.json",
+      "verification": "tests/test_artifacts.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-010",
+      "family": "DEPLOY",
+      "statement": "Nonroot OCI and digest-required uv/Python build configuration",
+      "implementation": "Dockerfile",
+      "verification": "release/gates.json",
+      "status": "design_or_environment_bound"
+    },
+    {
+      "id": "REQ-011",
+      "family": "PACE",
+      "statement": "P/A/C/E/T recovery with no implicit authority elevation",
+      "implementation": "Runbook.md",
+      "verification": "release/gates.json",
+      "status": "design_or_environment_bound"
+    },
+    {
+      "id": "REQ-012",
+      "family": "IaC",
+      "statement": "Terraform plan-only reference and Ansible host verification enabled",
+      "implementation": "ops/terraform/main.tf",
+      "verification": "tests/test_artifacts.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-013",
+      "family": "K8S",
+      "statement": "Observer Kubernetes role has no mutation verbs",
+      "implementation": "ops/kubernetes/remediator.yaml",
+      "verification": "release/gates.json",
+      "status": "design_or_environment_bound"
+    },
+    {
+      "id": "REQ-014",
+      "family": "PROVENANCE",
+      "statement": "Preserve original draft and mark it inherited, not executable",
+      "implementation": "references/drafts/main.py",
+      "verification": "release/artifact_manifest.json",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-015",
+      "family": "REPORT",
+      "statement": "Different requirements and close-out projections generated from one authoritative architecture graph and gate ledger",
+      "implementation": "architecture/graph.json",
+      "verification": "tests/test_artifacts.py",
+      "status": "implemented"
+    },
+    {
+      "id": "REQ-016",
+      "family": "RELEASE",
+      "statement": "Evidence-bound software admission and explicit external runtime holds",
+      "implementation": "release/gates.json",
+      "verification": "release/verification.md",
+      "status": "implemented"
+    }
+  ],
+  "components": [
+    {
+      "id": "Operator"
+    },
+    {
+      "id": "Host Identity"
+    },
+    {
+      "id": "Typed Ingress"
+    },
+    {
+      "id": "Policy/Grants"
+    },
+    {
+      "id": "CRUV-E Engine"
+    },
+    {
+      "id": "Terraform"
+    },
+    {
+      "id": "Ansible"
+    },
+    {
+      "id": "Tailnet"
+    },
+    {
+      "id": "k3s"
+    },
+    {
+      "id": "Evidence Ledger"
+    },
+    {
+      "id": "Metrics"
+    },
+    {
+      "id": "Alertmanager"
+    },
+    {
+      "id": "Grafana"
+    },
+    {
+      "id": "MCP Host"
+    }
+  ],
+  "edges": [
+    {
+      "from": "Operator",
+      "to": "Host Identity",
+      "relation": "authenticate"
+    },
+    {
+      "from": "Host Identity",
+      "to": "Typed Ingress",
+      "relation": "bind"
+    },
+    {
+      "from": "Typed Ingress",
+      "to": "Policy/Grants",
+      "relation": "admission"
+    },
+    {
+      "from": "Policy/Grants",
+      "to": "CRUV-E Engine",
+      "relation": "authorize"
+    },
+    {
+      "from": "CRUV-E Engine",
+      "to": "Terraform",
+      "relation": "bounded plan"
+    },
+    {
+      "from": "CRUV-E Engine",
+      "to": "Ansible",
+      "relation": "syntax check"
+    },
+    {
+      "from": "CRUV-E Engine",
+      "to": "Tailnet",
+      "relation": "status only"
+    },
+    {
+      "from": "CRUV-E Engine",
+      "to": "k3s",
+      "relation": "read only"
+    },
+    {
+      "from": "CRUV-E Engine",
+      "to": "Evidence Ledger",
+      "relation": "receipt"
+    },
+    {
+      "from": "CRUV-E Engine",
+      "to": "Metrics",
+      "relation": "measure"
+    },
+    {
+      "from": "Metrics",
+      "to": "Alertmanager",
+      "relation": "evaluate"
+    },
+    {
+      "from": "Metrics",
+      "to": "Grafana",
+      "relation": "visualize"
+    },
+    {
+      "from": "MCP Host",
+      "to": "Typed Ingress",
+      "relation": "stdio/http"
+    }
+  ],
+  "trade_study": [
+    {
+      "candidate": "Host CLI",
+      "role": "P",
+      "benefit": "Works offline with installed tools",
+      "constraint": "Needs host tooling"
+    },
+    {
+      "candidate": "Ansible syntax check",
+      "role": "A",
+      "benefit": "Deterministic static validation",
+      "constraint": "No host reachability"
+    },
+    {
+      "candidate": "Terraform plan",
+      "role": "C",
+      "benefit": "Machine-readable intended changes",
+      "constraint": "State dependency"
+    },
+    {
+      "candidate": "Read-only evidence",
+      "role": "E",
+      "benefit": "Retains diagnostics during DDIL",
+      "constraint": "No mutations"
+    }
+  ],
+  "pace": {
+    "P": "nominal approved inspections",
+    "A": "alternate installed local tools",
+    "C": "offline bounded evidence",
+    "E": "read-only safety triage",
+    "T": "deny operational commands"
+  }
+}

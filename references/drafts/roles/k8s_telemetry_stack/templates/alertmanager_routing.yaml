@@ -1,0 +1,24 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname', 'cluster', 'deployment']
+  group_wait: 15s
+  group_interval: 1m
+  repeat_interval: 2h
+  receiver: 'async-remediator-webhook'
+  routes:
+    # Explicit route for critical telemetry dropouts requiring node restarts
+    - match:
+        severity: critical
+        action: restart
+      receiver: 'async-remediator-webhook'
+      continue: true
+
+receivers:
+- name: 'async-remediator-webhook'
+  webhook_configs:
+    - url: 'http://cluster.local'
+      send_resolved: false
+      http_config:
+        bearer_token_file: '/var/run/secrets/kubernetes.io/serviceaccount/token'

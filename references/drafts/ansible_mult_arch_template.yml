@@ -1,0 +1,14 @@
+- name: "Validate Node Architecture and Apply Targets"
+  hosts: all
+  tasks:
+    - name: "Debug architecture facts discovered by agent"
+      ansible.builtin.debug:
+        msg: "System detected as {{ ansible_architecture }} on OS {{ ansible_os_family }}"
+
+    - name: "Apply Pi-specific configurations (ARM64)"
+      ansible.builtin.include_tasks: tasks/arm64_edge_tasks.yml
+      when: ansible_architecture == "aarch64" or ansible_architecture == "arm64"
+
+    - name: "Apply Workstation control plane configurations (x86_64)"
+      ansible.builtin.include_tasks: tasks/x86_desktop_tasks.yml
+      when: ansible_architecture == "x86_64"

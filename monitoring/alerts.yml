@@ -1,0 +1,17 @@
+groups:
+- name: hmt-devsecops
+  rules:
+  - alert: HMTDevSecOpsUnavailable
+    expr: up{job="hmt-devsecops"} == 0
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: Bounded operator API unavailable
+  - alert: HMTDevSecOpsDenials
+    expr: increase(hmt_devsecops_tool_calls_total{outcome="DENIED"}[5m]) > 10
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: Operator authorization denials increased

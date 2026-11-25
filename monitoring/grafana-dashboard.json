@@ -1,0 +1,37 @@
+{
+  "uid": "hmt-devsecops-v1",
+  "title": "HMT DevSecOps | Readiness & Admission",
+  "schemaVersion": 39,
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Service up",
+      "targets": [
+        {
+          "expr": "up{job=\"hmt-devsecops\"}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Calls by outcome",
+      "targets": [
+        {
+          "expr": "sum by (tool, outcome) (rate(hmt_devsecops_tool_calls_total[5m]))"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "p95 execution latency",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le,tool) (rate(hmt_devsecops_tool_latency_seconds_bucket[5m])))"
+        }
+      ]
+    }
+  ]
+}

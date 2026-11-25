@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "sessions": [
+    {
+      "cycle": 1,
+      "http_statuses": {
+        "authorized": 200,
+        "denied": 403,
+        "unauthenticated": 401,
+        "metrics": 200,
+        "readiness": 200
+      },
+      "metrics_bytes": 5308,
+      "note": "actual Uvicorn TCP process, no Docker"
+    },
+    {
+      "cycle": 2,
+      "http_statuses": {
+        "authorized": 200,
+        "denied": 403,
+        "unauthenticated": 401,
+        "metrics": 200,
+        "readiness": 200
+      },
+      "metrics_bytes": 5320,
+      "note": "actual Uvicorn TCP process, no Docker"
+    }
+  ]
+}

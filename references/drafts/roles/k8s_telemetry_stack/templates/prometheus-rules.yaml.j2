@@ -1,0 +1,53 @@
+apiVersion: ://coreos.com
+kind: PrometheusRule
+metadata:
+  name: telemetry-remediation-rules
+  namespace: monitoring
+  labels:
+    role: alert-rules
+    app: telemetry
+spec:
+  groups:
+    - name: telemetry-auto-healing
+      rules:
+        # ----------------------------------------------------------------------
+        # ALERT 1: Prometheus Deployment Pod Failure
+        # ----------------------------------------------------------------------
+        - alert: PrometheusPodStuckOrCrashLooping
+          expr: kube_deployment_status_replicas_unavailable{deployment="prometheus-deployment"} > 0
+          for: 3m
+          labels:
+            severity: critical
+            action: restart
+            deployment: prometheus-deployment
+          annotations:
+            summary: "Prometheus pods experiencing structural down-time on edge nodes"
+            description: "Deployment {% raw %}{{ $labels.deployment }}{% endraw %} has unavailable replicas. Triggering async webhook automated rollout restart."
+
+        # ----------------------------------------------------------------------
+        # ALERT 2: Loki Deployment Log Storage Engine Dropout
+        # ----------------------------------------------------------------------
+        - alert: LokiStorageEngineTimeout
+          expr: kube_deployment_status_replicas_unavailable{deployment="loki-deployment"} > 0
+          for: 5m
+          labels:
+            severity: critical
+            action: restart
+            deployment: loki-deployment
+          annotations:
+            summary: "Loki ingestion layer stalled or unresponsive"
+            description: "Loki deployment instances are down. Forwarding structural payload target to FastAPI queue worker."
+
+        # ----------------------------------------------------------------------
+        # ALERT 3: Grafana UI Subsystem Freeze
+        # ----------------------------------------------------------------------
+        - alert: GrafanaControlPlaneUnreachable
+          expr: up{job="grafana"} == 0
+          for: 2m
+          labels:
+            severity: critical
+            action: restart
+            deployment: grafana-deployment
+          annotations:
+            summary: "Grafana monitoring UI interface offline on workstation"
+            description: "Grafana telemetry endpoint dropped off target matrix. Re-cycling pod via cluster worker automation."

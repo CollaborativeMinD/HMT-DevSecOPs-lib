@@ -1,0 +1,199 @@
+# ==============================================================================
+# 1. PROMETHEUS STACK DEPLOYMENT (Pinned to Edge Node: pi-02)
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: monitoring
+  labels:
+    app: telemetry
+    component: prometheus
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # Required for ReadWriteOnce local storage paths during rollout swaps
+  selector:
+    matchLabels:
+      app: telemetry
+      component: prometheus
+  template:
+    metadata:
+      labels:
+        app: telemetry
+        component: prometheus
+    spec:
+      # Node Affinity forces this pod to execute strictly on the ARM64 edge node containing its storage path
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - pi-02
+      containers:
+        - name: prometheus
+          image: quay.io/prometheus/prometheus:v2.54.1
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus"
+            - "--storage.tsdb.retention.time=15d"
+          ports:
+            - containerPort: 9090
+              name: web
+          volumeMounts:
+            - name: prometheus-storage
+              mountPath: /prometheus
+            - name: config-volume
+              mountPath: /etc/prometheus
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+      volumes:
+        - name: prometheus-storage
+          persistentVolumeClaim:
+            claimName: pvc-prometheus-pi-02
+        - name: config-volume
+          configMap:
+            name: prometheus-config
+---
+# ==============================================================================
+# 2. LOKI LOGGING ENGINE DEPLOYMENT (Pinned to Edge Node: pi-01)
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki-deployment
+  namespace: monitoring
+  labels:
+    app: telemetry
+    component: loki
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: telemetry
+      component: loki
+  template:
+    metadata:
+      labels:
+        app: telemetry
+        component: loki
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - pi-01
+      containers:
+        - name: loki
+          image: grafana/loki:3.2.0
+          args:
+            - "-config.file=/etc/loki/local-config.yaml"
+          ports:
+            - containerPort: 3100
+              name: http-metrics
+          volumeMounts:
+            - name: loki-storage
+              mountPath: /opt/k8s/edge-storage/loki
+            - name: config-volume
+              mountPath: /etc/loki
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "150m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: loki-storage
+          persistentVolumeClaim:
+            claimName: pvc-loki-pi-01
+        - name: config-volume
+          configMap:
+            name: loki-config
+
+---
+# ==============================================================================
+# 3. GRAFANA UI DEPLOYMENT (Pinned to High-Performance Workstation Control Plane)
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deployment
+  namespace: monitoring
+  labels:
+    app: telemetry
+    component: grafana
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: telemetry
+      component: grafana
+  template:
+    metadata:
+      labels:
+        app: telemetry
+        component: grafana
+    spec:
+      # Pushes the analytics UI layer to the workstation plane to save Pi computing resources
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - workstation
+      # If your control plane workstation acts as a tainted cluster master node, tolerate it
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+          effect: "NoSchedule"
+      containers:
+        - name: grafana
+          image: grafana/grafana:11.2.2
+          ports:
+            - containerPort: 3000
+              name: service-port
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: "admin" # Replace with your dynamic env secret variables in your pipeline
+            - name: GF_USERS_ALLOW_SIGN_UP
+              value: "false"
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: pvc-grafana

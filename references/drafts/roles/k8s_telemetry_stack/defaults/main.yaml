@@ -1,0 +1,17 @@
+---
+# Version definitions pinned for strict immutability across architectures
+kube_prometheus_stack_version: "65.5.0"
+loki_stack_version: "2.12.0"
+
+# Multi-arch validated container images (supports x86_64, arm64/v8)
+prometheus_image: "quay.io/prometheus/prometheus"
+prometheus_tag: "v2.54.1"
+
+alertmanager_image: "quay.io/prometheus/alertmanager"
+alertmanager_tag: "v0.27.0"
+
+loki_image: "grafana/loki"
+loki_tag: "3.2.0"
+
+grafana_image: "grafana/grafana"
+grafana_tag: "11.2.2"

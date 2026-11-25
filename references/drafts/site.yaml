@@ -1,0 +1,14 @@
+---
+- name: Core Storage Initialization Phase
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - storage_provisioner
+
+- name: Cloud-Native Telemetry Deployment Phase
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - k8s_telemetry_stack

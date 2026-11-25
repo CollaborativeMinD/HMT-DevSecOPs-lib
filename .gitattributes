@@ -1,0 +1,4 @@
+evidence/** -text
+release/** -text
+references/drafts/** -text
+*.sh text eol=lf

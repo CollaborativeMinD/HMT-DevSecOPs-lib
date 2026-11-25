@@ -1,0 +1,141 @@
+---
+# ==========================================
+# 1. GRAFANA STORAGE (Shared / Workstation)
+# ==========================================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-grafana
+  labels:
+    app: telemetry
+    component: grafana
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: telemetry-local-storage
+  local:
+    path: /var/lib/k8s/main-storage/grafana
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - workstation
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-grafana
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: telemetry-local-storage
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      component: grafana
+
+---
+# ==========================================
+# 2. LOKI STORAGE (Distributed Across Pi Edge Nodes)
+# ==========================================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-loki-pi-01
+  labels:
+    app: telemetry
+    component: loki
+    node: pi-01
+spec:
+  capacity:
+    storage: 30Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: telemetry-local-storage
+  local:
+    path: /opt/k8s/edge-storage/loki
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - pi-01
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-loki-pi-01
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: telemetry-local-storage
+  resources:
+    requests:
+      storage: 30Gi
+  selector:
+    matchLabels:
+      component: loki
+      node: pi-01
+
+---
+# ==========================================
+# 3. PROMETHEUS STORAGE (Distributed Across Pi Edge Nodes)
+# ==========================================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-prometheus-pi-02
+  labels:
+    app: telemetry
+    component: prometheus
+    node: pi-02
+spec:
+  capacity:
+    storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: telemetry-local-storage
+  local:
+    path: /opt/k8s/edge-storage/prometheus
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - pi-02
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-prometheus-pi-02
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: telemetry-local-storage
+  resources:
+    requests:
+      storage: 40Gi
+  selector:
+    matchLabels:
+      component: prometheus
+      node: pi-02

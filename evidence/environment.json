@@ -1,0 +1,11 @@
+{
+  "python": "3.13.5",
+  "uv": "0.10.0",
+  "git": "2.47.3",
+  "docker": "unavailable",
+  "terraform": "unavailable",
+  "ansible-playbook": "unavailable",
+  "kubectl": "unavailable",
+  "tailscale": "unavailable",
+  "base_sha256": "6fa3110c7090e29dad99f2150804430bf9e4e26347bc4d8a55d8bbb2ad3c54d6"
+}
