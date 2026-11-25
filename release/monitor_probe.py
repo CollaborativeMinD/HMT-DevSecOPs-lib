@@ -26,6 +26,7 @@ def provision():
         path.chmod(0o440)
     metrics = state / "monitor"
     metrics.mkdir()
+    shutil.copyfile("/app/monitoring/prometheus.yml", metrics / "prometheus.yml")
     os.link(bound.resolve_ref(bound.policy.http.metrics_token_file), metrics / "hmt_metrics_token")
     print(json.dumps(compose_document(bound, Path("/app"))))
 
@@ -68,7 +69,8 @@ def verify_monitor(run, root, cfg, platform, app, companion, folder, project):
         api["command"] = api["command"][1:]
         monitor = spec["services"]["prometheus"]
         monitor.update(image=companion, platform=platform)
-        monitor["volumes"][0]["source"] = str(root / "monitoring/prometheus.yml")
+        monitor["volumes"][0] = {"type": "volume", "source": "credentials", "target": "/etc/prometheus",
+                                 "read_only": True, "volume": {"subpath": "monitor"}}
         monitor["volumes"][1] = {"type": "volume", "source": "credentials", "target": "/run/secrets",
                                  "read_only": True, "volume": {"subpath": "monitor"}}
         file.write_text(json.dumps(spec), encoding="utf8")
