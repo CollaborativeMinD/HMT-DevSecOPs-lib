@@ -42,6 +42,14 @@ def test_http_health(config):
         assert client.post('/tools/call', content=b'x'*8193, headers=headers).status_code == 413
 
 
+def test_http_policy_controls_actual_request_limit(config):
+    with config.source.open('a', encoding='utf8') as stream:
+        stream.write('\n[http.budget]\nrequest_bytes = 64\nretry_after_seconds = 3\n')
+    with TestClient(create_app(config.source)) as client:
+        assert client.get('/health/ready').status_code == 200
+        assert client.post('/tools/call', content=b'x' * 65).status_code == 413
+
+
 def test_http_not_ready(monkeypatch):
     monkeypatch.delenv("HMT_DEVSECOPS_CONFIG", raising=False)
     with TestClient(create_app()) as client:

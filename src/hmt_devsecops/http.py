@@ -89,13 +89,14 @@ def create_app(source: Path | None = None, expected_sha256: str | None = None) -
         length = request.headers.get("content-length", "0")
         if not length.isascii() or not length.isdecimal() or len(length) > 20:
             raise HTTPException(400, "INVALID_CONTENT_LENGTH")
-        if int(length) > 8192:
-            raise HTTPException(413, "PAYLOAD_TOO_LARGE")
         runtime = _runtime(request)
+        budget = runtime.bound.policy.http.budget
+        if int(length) > budget.request_bytes:
+            raise HTTPException(413, "PAYLOAD_TOO_LARGE")
         _authenticate(request, runtime.api_token, "UNAUTHORIZED")
         body = bytearray()
         async for chunk in request.stream():
-            if len(body) + len(chunk) > 8192:
+            if len(body) + len(chunk) > budget.request_bytes:
                 raise HTTPException(413, "PAYLOAD_TOO_LARGE")
             body.extend(chunk)
         try:
@@ -104,7 +105,7 @@ def create_app(source: Path | None = None, expected_sha256: str | None = None) -
             raise HTTPException(400, "INVALID_CONTRACT") from None
         if not runtime.slots.acquire(blocking=False):
             HTTP_REJECTED.labels(reason="capacity").inc()
-            raise HTTPException(429, "HTTP_CAPACITY_EXCEEDED", headers={"Retry-After": "1"})
+            raise HTTPException(429, "HTTP_CAPACITY_EXCEEDED", headers={"Retry-After": str(budget.retry_after_seconds)})
 
         def run_owned():
             try:

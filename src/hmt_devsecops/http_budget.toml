@@ -1,0 +1,2 @@
+request_bytes = 8192
+retry_after_seconds = 1

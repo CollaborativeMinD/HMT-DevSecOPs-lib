@@ -29,7 +29,18 @@ class Declaration(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True, hide_input_in_errors=True)
 
 
+class HTTPBudget(Declaration):
+    request_bytes: Annotated[int, Field(strict=True, ge=1, le=8192)]
+    retry_after_seconds: Annotated[int, Field(strict=True, ge=1, le=60)]
+
+    @classmethod
+    def shipped(cls):
+        with Path(__file__).with_name("http_budget.toml").open("rb") as stream:
+            return cls.model_validate(tomllib.load(stream))
+
+
 class HTTPPolicy(Declaration):
+    budget: HTTPBudget = Field(default_factory=HTTPBudget.shipped)
     max_inflight: Annotated[int, Field(strict=True, ge=1, le=64)]
     api_token_file: PathText
     metrics_token_file: PathText
@@ -61,7 +72,19 @@ class ResourceBudget(Declaration):
             return cls.model_validate(tomllib.load(stream))
 
 
+class MonitorStore(Declaration):
+    uid: Annotated[int, Field(strict=True, ge=1000, le=65534)]
+    gid: Annotated[int, Field(strict=True, ge=1000, le=65534)]
+    data_path: Annotated[str, Field(pattern=r"^/(var/)?prometheus$")]
+
+    @classmethod
+    def shipped(cls):
+        with Path(__file__).with_name("monitor_store.toml").open("rb") as stream:
+            return cls.model_validate(tomllib.load(stream))
+
+
 class Deployment(Declaration):
+    monitor_store: MonitorStore = Field(default_factory=MonitorStore.shipped)
     resources: ResourceBudget = Field(default_factory=ResourceBudget.shipped)
     python_apk: Annotated[str, Field(pattern=r"^3\.13\.\d+_git\d+-r\d+$")] | None = None
     python_image: Image

@@ -194,6 +194,10 @@ def container(cfg, commit, out, platform, scanner):
         raise ValueError("Image platform or origin mismatch")
     report=scan(cfg,tag,out/"scan.json",scanner)
     companion=scan_companion(cfg,platform,out,scanner)
+    from monitor_probe import verify_monitor
+    with TemporaryDirectory() as tmp:
+        companion["scrape"] = verify_monitor(run, ROOT, cfg, platform, tag, companion["image"], Path(tmp),
+                                             cfg.name + "-monitor-" + os.urandom(4).hex())
     spec=out/"compose.json"
     pin=hashlib.sha256(run("git","show",commit+":console.toml")).hexdigest()
     put(spec,cfg.compose(tag,platform,pin))

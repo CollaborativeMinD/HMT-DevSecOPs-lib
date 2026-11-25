@@ -89,3 +89,5 @@ The job builds and reinstalls the Windows wheel, checks the target machine and U
 For a container installation, load the matching `.image.tar.gz` and use its accompanying `compose.json`. Provision the service's credential directory with `docker compose -f compose.json run --rm console credentials /state/credentials`. Apply the component's native setup before starting the console. The server binds loopback inside its own network namespace. Supply upstream files as read-only mounts and place a dependent local service or client in that same namespace. Review the policy digest, package hashes, image identity, scan report and effect before promoting the revision.
 
 The release resolves the declared companion image to its child manifest for each CPU architecture and scans that exact digest. The image receipt records both the child digest and the scan hash.
+
+Set the native HTTP body limit and capacity retry delay in `[http.budget]`. The declared Prometheus user, group and storage path in `[deployment.monitor_store]` must match the pinned image. The release witness waits for a successful authenticated scrape on each platform and records the active policy digest.
