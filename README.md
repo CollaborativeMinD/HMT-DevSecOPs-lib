@@ -30,4 +30,8 @@ The linked HTML reports distinguish executable software proof from deployment-on
 
 Forgejo runs the locked Linux suite with the 90% coverage floor, starts real CLI, stdio, and HTTP processes for the policy witness, and builds the wheel. The witness preserves the TOML, proposal, Compose artifact, and receipts. [Forgejo workflow](.forgejo/workflows/policy.yml)
 
+The workstation qualified source commit `ec4b0dc`. Forgejo run 1 passed 74 tests at 94.01% combined coverage. The artifact and job log were read back from RustFS. The CLI proposal, MCP verification, and live HTTP verification agreed on the policy and proposal hashes. [Forgejo run](http://127.0.0.1:3001/station-operator/hmt-devsecops-lib/actions/runs/1) · [Readback receipt](evidence/policy-toml/verification.json) · [Evidence and wheel](evidence/policy-toml/forgejo-evidence.zip)
+
+The rendered Compose artifact passed `docker compose config`. Both OCI architectures then ran the API and a live authenticated Prometheus scrape with disposable read-only Docker volumes. [OCI verification](evidence/policy-toml/oci-verification.json)
+
 The requirements graph, screenshots, and gate reports describe the original 1.0.0 release. [Historical evidence](release/verification.md)

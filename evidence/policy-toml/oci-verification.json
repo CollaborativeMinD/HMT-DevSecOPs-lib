@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "source_commit": "ec4b0dcba256da72a46118574051ab67241a4b96",
+  "application_image": "hmt-devsecops-tools:1.1.0",
+  "application_image_index": "sha256:8f8bacfa7528554e8cb33801c37b29b11f1202ff1d822d2650791bf042999fbb",
+  "rendered_compose_config": "PASS",
+  "platforms": [
+    {
+      "platform": "linux/amd64",
+      "machine": {
+        "api": "x86_64",
+        "prometheus": "x86_64"
+      },
+      "image_configs": {
+        "api": "sha256:8f8bacfa7528554e8cb33801c37b29b11f1202ff1d822d2650791bf042999fbb",
+        "prometheus": "sha256:e04987641b57704f408e31f6373ba4138ecf27cb4a165d24aabb6c38fddd0f06"
+      },
+      "policy_sha256": "47fcb42d26dafaf81b0d2dd41fa5b4ebc53a4439f4f7c79e92be170b44736280",
+      "artifact_sha256": "b72e6ac29b8f0630f71fea666c7bd7ce4408a2e0cb1545b615439ea1a2b2abf1",
+      "tool_status": 200,
+      "wrong_metrics_token": 401,
+      "prometheus_target": "http://devsecops:8080/metrics",
+      "prometheus_target_health": "up",
+      "config_transport": "test-owned read-only Docker volumes"
+    },
+    {
+      "platform": "linux/arm64",
+      "machine": {
+        "api": "aarch64",
+        "prometheus": "aarch64"
+      },
+      "image_configs": {
+        "api": "sha256:8f8bacfa7528554e8cb33801c37b29b11f1202ff1d822d2650791bf042999fbb",
+        "prometheus": "sha256:e04987641b57704f408e31f6373ba4138ecf27cb4a165d24aabb6c38fddd0f06"
+      },
+      "policy_sha256": "47fcb42d26dafaf81b0d2dd41fa5b4ebc53a4439f4f7c79e92be170b44736280",
+      "artifact_sha256": "b72e6ac29b8f0630f71fea666c7bd7ce4408a2e0cb1545b615439ea1a2b2abf1",
+      "tool_status": 200,
+      "wrong_metrics_token": 401,
+      "prometheus_target": "http://devsecops:8080/metrics",
+      "prometheus_target_health": "up",
+      "config_transport": "test-owned read-only Docker volumes"
+    }
+  ]
+}

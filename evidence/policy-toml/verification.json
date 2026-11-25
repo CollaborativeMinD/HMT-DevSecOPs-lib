@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "source_commit": "ec4b0dcba256da72a46118574051ab67241a4b96",
+  "forgejo_run": "http://127.0.0.1:3001/station-operator/hmt-devsecops-lib/actions/runs/1",
+  "forgejo_run_id": 7,
+  "tests": 74,
+  "coverage_percent": 94.0068493150685,
+  "artifact_bucket": "forgejo-ci",
+  "artifact_object": "actions_artifacts/7/10/1795576317736648100.chunk",
+  "log_object": "actions_log/station-operator/hmt-devsecops-lib/0e/14.log.zst",
+  "archive_sha256": "fea5756bf15961dc72d7242ef97726b978fe3d65b3830879ad52569f8f84f929",
+  "wheel": "dist/hmt_devsecops_tools-1.1.0-py3-none-any.whl",
+  "wheel_sha256": "97958cab1c68e11fdeca9ccd3d2a439963df68b09388348af84a5d4c716305ab",
+  "policy_sha256": "15e8349e1683188e1ce769372951ac3eab4efc2250cb4b62722b14ff67c4779f",
+  "proposal_sha256": "3efadb9f4248972f7daa5db2a6a76b4d47150ad97705ed8821b014389edef656"
+}

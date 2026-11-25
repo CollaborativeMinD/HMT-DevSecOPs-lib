@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "revision": "ec4b0dcba256da72a46118574051ab67241a4b96",
+  "python": "3.13.17",
+  "platform": "Linux",
+  "policy_sha256": "15e8349e1683188e1ce769372951ac3eab4efc2250cb4b62722b14ff67c4779f",
+  "admission_denial": "POLICY_SCHEMA_INVALID",
+  "no_approval": "EXPLICIT_APPROVAL_REQUIRED",
+  "replay": "EXISTING_TARGET_IMMUTABLE",
+  "legacy_http_token_status": 401,
+  "http_metrics_status": 200,
+  "wrong_metrics_token_status": 401,
+  "artifact_sha256": "3efadb9f4248972f7daa5db2a6a76b4d47150ad97705ed8821b014389edef656",
+  "receipts": {
+    "cli": {
+      "disposition": "PASS",
+      "reason": "PROPOSAL_ONLY_NO_APPLY",
+      "payload": {
+        "sha256": "3efadb9f4248972f7daa5db2a6a76b4d47150ad97705ed8821b014389edef656",
+        "policy_sha256": "15e8349e1683188e1ce769372951ac3eab4efc2250cb4b62722b14ff67c4779f"
+      }
+    },
+    "stdio": {
+      "disposition": "PASS",
+      "reason": "HASH_WITNESS",
+      "payload": {
+        "sha256": "3efadb9f4248972f7daa5db2a6a76b4d47150ad97705ed8821b014389edef656",
+        "policy_sha256": "15e8349e1683188e1ce769372951ac3eab4efc2250cb4b62722b14ff67c4779f"
+      }
+    },
+    "http": {
+      "disposition": "PASS",
+      "reason": "HASH_WITNESS",
+      "payload": {
+        "sha256": "3efadb9f4248972f7daa5db2a6a76b4d47150ad97705ed8821b014389edef656",
+        "policy_sha256": "15e8349e1683188e1ce769372951ac3eab4efc2250cb4b62722b14ff67c4779f"
+      }
+    }
+  },
+  "artifact_digests": {
+    "witness_policy.toml": "15e8349e1683188e1ce769372951ac3eab4efc2250cb4b62722b14ff67c4779f",
+    "compose.yaml": "f6cd11fb2c19827be9fce7bfc25007763893f49d243d7a904740049653294375",
+    "review.json": "3efadb9f4248972f7daa5db2a6a76b4d47150ad97705ed8821b014389edef656"
+  }
+}
