@@ -96,7 +96,7 @@ def revision():
 
 
 def archive(commit, dest):
-    run("git", "archive", "--format=zip", "--output", str(dest), commit)
+    run("git", "-c", "core.autocrlf=false", "archive", "--format=zip", "--output", str(dest), commit)
 
 
 def package(cfg, commit, out):
