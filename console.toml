@@ -1,0 +1,17 @@
+version = 1
+component = "HMT DevSecOps"
+host = "127.0.0.1"
+port = 8770
+protocol = "2026-07-28"
+poll_seconds = 3
+
+[roles]
+viewer = ["inventory.read"]
+admin = ["inventory.read", "policy.open", "policy.apply"]
+agent = ["inventory.read", "task.execute"]
+
+[resources.workspace-inventory]
+operation = "inventory"
+editable_inputs = []
+source = ".local/hmt_policy.toml"
+[resources.workspace-inventory.inputs]

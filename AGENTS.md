@@ -17,3 +17,7 @@ Declare the rule and run admission. Add a typed binding if it is missing. Exerci
 same request through the existing tool and compare the artifact and policy digests.
 Keep credentials in protected files outside the workspace. Keep the ten tool contracts,
 the JSON-RPC wire format, and the v1.0.0 evidence. [Operator steps](Runbook.md)
+
+## Live operator console
+
+Use the [console guide](Console.md) to observe inventory, publish scoped TOML changes, run admitted tasks and verify their receipts.

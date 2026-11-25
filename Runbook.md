@@ -58,3 +58,7 @@ uv run --locked python tools/verify_reports_browser.py
 ```
 
 Browser verification requires Playwright and a real Chromium installation. The Requirements and Close-out views explain different stages of the same architecture graph. Their original images and gate receipts stay with the original release.
+
+## Live operator console
+
+Use the [console guide](Console.md) to observe inventory, publish scoped TOML changes, run admitted tasks and verify their receipts.

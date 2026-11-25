@@ -5,3 +5,8 @@ __pycache__/
 dist/
 runtime/
 ci-proof/
+
+.local/
+.console-venv/
+console-evidence/
+__pycache__/
