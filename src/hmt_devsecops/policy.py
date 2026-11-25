@@ -69,7 +69,24 @@ class Deployment(Declaration):
     http_port: Annotated[int, Field(strict=True, ge=1024, le=65535)]
 
 
+class ToolBudget(Declaration):
+    inventory_entries: Annotated[int, Field(strict=True, ge=1, le=64)]
+    command_seconds: Annotated[int, Field(strict=True, ge=1, le=12)]
+    stdout_chars: Annotated[int, Field(strict=True, ge=1, le=4096)]
+    stderr_chars: Annotated[int, Field(strict=True, ge=1, le=2048)]
+    read_bytes: Annotated[int, Field(strict=True, ge=1, le=16384)]
+    verify_bytes: Annotated[int, Field(strict=True, ge=1, le=1048576)]
+    proposal_chars: Annotated[int, Field(strict=True, ge=1, le=2048)]
+    plan_lock_seconds: Annotated[int, Field(strict=True, ge=1, le=5)]
+
+    @classmethod
+    def shipped(cls):
+        with Path(__file__).with_name("tool_budget.toml").open("rb") as stream:
+            return cls.model_validate(tomllib.load(stream))
+
+
 class Policy(Declaration):
+    tool_budget: ToolBudget = Field(default_factory=ToolBudget.shipped)
     version: Annotated[int, Field(strict=True, ge=1, le=1)]
     workspace: PathText
     principal: Annotated[str, Field(strict=True, min_length=1, max_length=128)]

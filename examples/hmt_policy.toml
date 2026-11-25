@@ -26,3 +26,13 @@ processes = 64
 service_cpus = 1.0
 monitoring_cpus = 0.5
 monitoring_days = 7
+
+[tool_budget]
+inventory_entries = 64
+command_seconds = 12
+stdout_chars = 4096
+stderr_chars = 2048
+read_bytes = 16384
+verify_bytes = 1048576
+proposal_chars = 2048
+plan_lock_seconds = 5

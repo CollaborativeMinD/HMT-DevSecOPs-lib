@@ -73,3 +73,5 @@ Start with [examples/hmt_policy.toml](examples/hmt_policy.toml) for this compone
 4. Qualify the exact commit on local Forgejo. Review the package, image, security scan and receipt for each release target. Ship the reviewed artifacts and record their digests.
 
 The version 2 `[runtime]` table in `console.toml` sets request size, concurrency and client deadlines. Version 1 files inherit the shipped budget. Reissue them as version 2 to pin these choices in the admitted document.
+
+Set command limits in `[tool_budget]` and resource limits in `[deployment.resources]` in the [host policy](examples/hmt_policy.toml). The native dispatcher and Compose renderer consume these validated fields.
