@@ -41,12 +41,11 @@ def compose_document(bound: BoundPolicy, context: Path) -> dict:
             raise Denied("COMPOSE_MOUNT_COLLISION")
         targets.add(target)
         mounts.append(_mount(bound.resolve_ref(ref), target))
-    sandbox = {"read_only": True, "cap_drop": ["ALL"], "security_opt": ["no-new-privileges:true"],
-               "tmpfs": ["/tmp:size=16m,noexec,nosuid"], "mem_limit": "256m", "pids_limit": 64}
+    sandbox = deploy.resources.sandbox()
     return {
         "services": {
             "devsecops": {
-                **sandbox, "image": f"hmt-devsecops-tools:{__version__}", "user": "10001:10001", "cpus": 1,
+                **sandbox, "image": f"hmt-devsecops-tools:{__version__}", "user": "10001:10001", "cpus": deploy.resources.service_cpus,
                 "build": {"context": str(context.resolve()).replace("$", "$$"),
                           "args": {"PYTHON_IMAGE": deploy.python_image, "UV_IMAGE": deploy.uv_image}},
                 "ports": [f"127.0.0.1:{deploy.http_port}:{API_PORT}"], "volumes": mounts,
@@ -56,9 +55,9 @@ def compose_document(bound: BoundPolicy, context: Path) -> dict:
             },
             "prometheus": {
                 **sandbox, "profiles": ["monitoring"], "image": deploy.prometheus_image,
-                "user": "65534:65534", "group_add": ["10001"], "cpus": 0.5,
+                "user": "65534:65534", "group_add": ["10001"], "cpus": deploy.resources.monitoring_cpus,
                 "command": ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus",
-                            "--storage.tsdb.retention.time=7d"],
+                            f"--storage.tsdb.retention.time={deploy.resources.monitoring_days}d"],
                 "volumes": [_mount(context.resolve() / "monitoring/prometheus.yml", "/etc/prometheus/prometheus.yml"),
                             _mount(bound.resolve_ref(http.metrics_token_file), METRICS_TARGET),
                             "prometheus-data:/prometheus"],

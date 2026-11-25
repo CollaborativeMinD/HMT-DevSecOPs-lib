@@ -1,0 +1,6 @@
+memory_mib = 256
+temporary_mib = 16
+processes = 64
+service_cpus = 1.0
+monitoring_cpus = 0.5
+monitoring_days = 7

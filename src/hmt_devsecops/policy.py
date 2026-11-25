@@ -42,7 +42,27 @@ class Executables(Declaration):
     tailscale_status: PathText | None = None
 
 
+class ResourceBudget(Declaration):
+    memory_mib: Annotated[int, Field(strict=True, ge=32, le=4096)]
+    temporary_mib: Annotated[int, Field(strict=True, ge=1, le=256)]
+    processes: Annotated[int, Field(strict=True, ge=8, le=512)]
+    service_cpus: Annotated[float, Field(gt=0, le=8)]
+    monitoring_cpus: Annotated[float, Field(gt=0, le=8)]
+    monitoring_days: Annotated[int, Field(strict=True, ge=1, le=365)]
+
+    def sandbox(self):
+        return {"read_only": True, "cap_drop": ["ALL"], "security_opt": ["no-new-privileges:true"],
+                "tmpfs": [f"/tmp:size={self.temporary_mib}m,noexec,nosuid"],
+                "mem_limit": f"{self.memory_mib}m", "pids_limit": self.processes}
+
+    @classmethod
+    def shipped(cls):
+        with Path(__file__).with_name("resource_budget.toml").open("rb") as stream:
+            return cls.model_validate(tomllib.load(stream))
+
+
 class Deployment(Declaration):
+    resources: ResourceBudget = Field(default_factory=ResourceBudget.shipped)
     python_image: Image
     uv_image: Image
     prometheus_image: Image
